@@ -1,6 +1,6 @@
 
 import java.util.*;
-///A class que vai ajuda a molda e "orientar" o objeto
+-A class que vai ajuda a molda e "orientar" o objeto
 class Aluno{
  private  String Nome;
   private double NotaP;
