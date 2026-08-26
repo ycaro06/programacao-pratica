@@ -1,1 +1,84 @@
 
+import java.util.*;
+//A class que vai ajuda a molda e "orientar" o objeto
+class Aluno{
+ private  String Nome;
+  private double NotaP;
+   private double NotaB;
+    private double Media;
+
+  public Aluno(String Nome, double NotaP,double NotaB){
+    this.Nome = Nome;
+    this.NotaP =  NotaP;
+    this.NotaB = NotaB;
+    
+  }
+  double CalculoDenota(){
+    Media =  (NotaP + NotaB) / 2;
+    return Media;
+  }
+
+  boolean ValidoOuNao(){
+  if (NotaP > 10 || NotaP < 0 || NotaB > 10 || NotaB < 0 || Media > 10 || Media < 0){
+    System.out.printf("ERRO!! - Por favor digite um numero valido de 0 a 10 %n%n");
+   return false;
+  } else{
+return true;
+  }
+  }
+public String getNome() {
+    return Nome;
+}
+  public String toString(){
+  CalculoDenota();
+  ValidoOuNao();
+  return String.format ("|| aluno: %s ||%n ||tirou: %.2f na parcial||%n tirou: %.2f na bimestral||%n || media geral foi: %.2f ||%n",Nome,NotaP,NotaB,Media);
+  }
+  }
+
+public class Main {
+    public static void main(String[] args) {
+     Locale.setDefault(Locale.US);
+     
+     Scanner sc = new Scanner(System.in); 
+     //AV1(A primeira avaliçao que os alunos fazem)
+System.out.println("||-Digite o nome do aluno e as notas da AV1-||");
+    Aluno v1 = new Aluno( sc.nextLine(),sc.nextDouble(),sc.nextDouble());
+    
+   if(v1.ValidoOuNao()){
+    System.out.println("Sua media foi: " + v1.CalculoDenota());
+   }
+     //AV2(A segunda avaliçao que os alunos fazem)
+System.out.println("||-Digite as notas da AV2-||");
+    Aluno v2 = new Aluno( sc.nextLine(),sc.nextDouble(),sc.nextDouble());
+    
+      if(v2.ValidoOuNao()){
+    System.out.printf("Sua media foi: %.2f %n%n" , v2.CalculoDenota());
+   }
+     //calculo para ver se passou pra AV3
+    double PassouAV3 = ((v1.CalculoDenota() + v2.CalculoDenota()) /2);
+  System.out.printf("media da AV1 e AV2 foi: %.2f%n",PassouAV3 );
+     if(PassouAV3 < 4) {
+   System.out.println("__-REPROVADO-__");
+     }else{
+       System.out.println("__-APROVADO!-__");
+     }
+    
+
+     //AV3 ( basicamente AV3 é ultima avaliçao pra decidir se foi aprovado ou reprovado)
+System.out.println("||-Digite as notas da AV3-||");
+    Aluno v3 = new Aluno( sc.nextLine(),sc.nextDouble(),sc.nextDouble());
+
+double CalculoFinal = (PassouAV3 + v3.CalculoDenota()) /2;
+
+ if(v3.ValidoOuNao()){
+  System.out.printf("||Aluno: %s|| Media da AV1 + AV2: %.2f||Media da v3: %.2f||media final AV3: %.2f||%n ",v1.getNome(),PassouAV3,v3.CalculoDenota(), CalculoFinal );
+ }
+ 
+     if(CalculoFinal  < 6) {
+   System.out.printf("__-REPROVADO-__");
+     }else{
+       System.out.println("__-APROVADO!-__");
+     }
+    }
+    }
